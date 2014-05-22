@@ -1,10 +1,10 @@
 module Fight
     def punch(person, power)
         if power < 5
-            puts "#{person.name} was punched with a power level of #{power}! #{person.scream} #{person.run}"
+            puts "#{person.name} was punched by #{@name} with a power level of #{power}! #{person.scream} #{person.run}"
             person.caffeine_level -= 1
         else
-            puts "#{person.name} was somersaulted into the air with a punch power level of #{power}!"
+            puts "#{person.name} was somersaulted into the air by #{@name} with a punch power level of #{power}!"
             person.caffeine_level -= 5
         end
     end
@@ -20,11 +20,13 @@ class Person
     end
 
     def run
-        puts "Making an escape now"
+        puts "#{@name} is making an escape now"
+        return Person.new(@name, @caffeine_level)
     end
 
     def scream
         puts "AHHHH!"
+        return Person.new(@name, @caffeine_level)
     end
 
     def drink_coffee
@@ -67,18 +69,8 @@ class EvilNinja < Person
         @evilness = evilness
     end
 
-    def punch(person, power)
-        if power < 5
-            puts "#{person.name} was punched with a power level of #{power}! #{person.scream} #{person.run}"
-            person.caffeine_level -= 1
-        else
-            puts "#{person.name} was somersaulted into the air with a punch power level of #{power}!"
-            person.caffeine_level -= 5
-        end
-    end
-
     def cause_mayhem(person)
-        "#{@name} unleashed mayhem on #{person.name}! #{person.name}'s caffeine level is drained to zero!"
+        puts "#{@name} unleashed mayhem on #{person.name}! #{person.name}'s caffeine level is drained to zero!"
         person.caffeine_level = 0
     end
 end
@@ -86,8 +78,8 @@ end
 def fight_scene(power_ranger1, power_ranger2, evil_ninja1, evil_ninja2, person1, person2)
     power_ranger1.punch(evil_ninja1, 6)
     evil_ninja2.cause_mayhem(person1)
-    person2.scream.run
-    power_rangr2.use_megazord(evil_ninja2)
+    person2.run.scream
+    power_ranger2.use_megazord(evil_ninja2)
 end
 
 person1 = Person.new("Austin", 10)
