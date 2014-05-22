@@ -1,3 +1,15 @@
+module Fight
+    def punch(person, power)
+        if power < 5
+            puts "#{person.name} was punched with a power level of #{power}! #{person.scream} #{person.run}"
+            person.caffeine_level -= 1
+        else
+            puts "#{person.name} was somersaulted into the air with a punch power level of #{power}!"
+            person.caffeine_level -= 5
+        end
+    end
+end
+
 class Person
 
     attr_accessor :name, :caffeine_level
@@ -22,6 +34,8 @@ end
 
 class PowerRanger < Person
 
+    include Fight
+
     attr_accessor :caffeine_level
     attr_reader :name, :strength, :color
 
@@ -29,17 +43,6 @@ class PowerRanger < Person
         super(name, caffeine_level)
         @strength = strength
         @color = color
-    end
-
-    def punch(person, power)
-        if power < 5
-            puts "#{person.name} was punched with a power level of #{power}! #{person.scream} #{person.run}"
-            person.caffeine_level -= 1
-        else
-            puts "#{person.name} was somersaulted into the air with a punch power level of #{power}!"
-            person.caffeine_level -= 5
-        end
-
     end
 
     def rest
@@ -52,6 +55,12 @@ class PowerRanger < Person
 end
 
 class EvilNinja < Person
+
+    attr_accessor :caffeine_level
+    attr_reader :name, :strength, :evilness
+
+    include Fight
+
     def initialize(name, caffeine_level, strength, evilness)
         super(name, caffeine_level)
         @strength = strength
@@ -80,3 +89,12 @@ def fight_scene(power_ranger1, power_ranger2, evil_ninja1, evil_ninja2, person1,
     person2.scream.run
     power_rangr2.use_megazord(evil_ninja2)
 end
+
+person1 = Person.new("Austin", 10)
+person2 = Person.new("KC", 3)
+power_ranger1 = PowerRanger.new("Ivan", 8, 76, "pink")
+power_ranger2 = PowerRanger.new("Carl", 7, 88, "blue")
+evil_ninja1 = EvilNinja.new("Santi", 4, 69, 100)
+evil_ninja2 = EvilNinja.new("Daggi", 3, 53, 28)
+
+puts fight_scene(power_ranger1, power_ranger2, evil_ninja1, evil_ninja2, person1, person2)
