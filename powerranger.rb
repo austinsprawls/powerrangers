@@ -50,4 +50,21 @@ class PowerRanger < Person
 end
 
 class EvilNinja < Person
+    def initialize(name, caffeine_level, strength, evilness)
+    end
+
+    def punch(person, power)
+        if power < 5
+            puts "#{person.name} was punched with a power level of #{power}! #{person.scream} #{person.run}"
+            person.caffeine_level -= 1
+        else
+            puts "#{person.name} was somersaulted into the air with a punch power level of #{power}!"
+            person.caffeine_level -= 5
+        end
+    end
+
+    def cause_mayhem(person)
+        "#{@name} unleashed mayhem on #{person.name}! #{person.name}'s caffeine level is drained to zero!"
+        person.caffeine_level = 0
+    end
 end
