@@ -17,7 +17,12 @@ class Person
     end
 end
 
-class PowerRanger
+class PowerRanger < Person
+
+    def initialize(strength, color)
+        @strength = strength
+        @color = color
+    end
 end
 
 class EvilNinja
