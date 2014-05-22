@@ -22,9 +22,11 @@ end
 
 class PowerRanger < Person
 
+    attr_accessor :caffeine_level
+    attr_reader :name, :strength, :color
+
     def initialize(name, caffeine_level, strength, color)
-        @name = name
-        @caffeine_level = caffeine_level
+        super(name, caffeine_level)
         @strength = strength
         @color = color
     end
@@ -43,7 +45,7 @@ class PowerRanger < Person
     def rest
     end
 
-    def user_megazord(person)
+    def use_megazord(person)
         puts "#{person.name} was hit with the MegaZord!"
         person.caffeine_level -= 10
     end
@@ -51,6 +53,9 @@ end
 
 class EvilNinja < Person
     def initialize(name, caffeine_level, strength, evilness)
+        super(name, caffeine_level)
+        @strength = strength
+        @evilness = evilness
     end
 
     def punch(person, power)
@@ -67,4 +72,11 @@ class EvilNinja < Person
         "#{@name} unleashed mayhem on #{person.name}! #{person.name}'s caffeine level is drained to zero!"
         person.caffeine_level = 0
     end
+end
+
+def fight_scene(power_ranger1, power_ranger2, evil_ninja1, evil_ninja2, person1, person2)
+    power_ranger1.punch(evil_ninja1, 6)
+    evil_ninja2.cause_mayhem(person1)
+    person2.scream.run
+    power_rangr2.use_megazord(evil_ninja2)
 end
